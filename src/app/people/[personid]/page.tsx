@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { getPerson } from '@/app/lib/services/persons'
+import { getPerson } from '@/app/lib/service/api/person'
 import Person from '@/app/ui/person/person'
 import { Metadata } from 'next'
 

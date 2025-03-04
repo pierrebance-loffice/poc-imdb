@@ -3,11 +3,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { sift } from 'radash'
-import { Movie } from '@/app/lib/services/types'
+import { Movie } from '@/app/lib/service/models/movie'
 import Genre from '../genre/genre'
 import { ChangeEvent, useCallback, useMemo, useState } from 'react'
 import { Pagination } from '@mui/material'
-import { sortPopularity } from '@/app/lib/services/utils'
 import { ImageNotSupported } from '@mui/icons-material'
 
 const creditsPagination = 6
@@ -17,11 +16,12 @@ export default function MoviePeople({ movie }: { movie: Movie }) {
     () => movie.credits.crew.find(({ job }) => job === 'Director'),
     [movie]
   )
-
   const actors = useMemo(
     () =>
       movie.credits.cast
-        .sort(sortPopularity)
+        .sort((person1, person2) =>
+          person1.popularity > person2.popularity ? -1 : 1
+        )
         .filter((actor) => !!actor.character),
     [movie]
   )

@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { sift, unique } from 'radash'
-import { Person } from '@/app/lib/services/types'
+import { Person } from '@/app/lib/service/models/person'
 import { ChangeEvent, useCallback, useMemo, useState } from 'react'
 import { Pagination } from '@mui/material'
 import { ImageNotSupported } from '@mui/icons-material'
@@ -70,7 +70,7 @@ export default function PersonMovies({ person }: { person: Person }) {
 
             <div className="absolute bottom-0 left-0 right-0 top-0  p-2 text-center text-lg font-bold text-white opacity-0 hover:opacity-100">
               <div className="absolute bottom-0 left-0 right-0 top-0 bg-black p-0 opacity-50"></div>
-              <div className="absolute bottom-0 left-0 right-0 top-0 mt-1 text-ellipsis opacity-0 shadow-lg">
+              <div className="absolute bottom-0 left-0 right-0 top-0 mt-1 text-ellipsis opacity-0 shadow-lg hover:opacity-100">
                 {movie.title}
               </div>
             </div>

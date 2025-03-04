@@ -56,12 +56,6 @@ Créer un fichier `.env` à la racine du projet
 API_ENDPOINT=https://api.themoviedb.org/3
 API_LANG=fr-FR
 API_KEY=<paste API key>
-API_TOKEN=<paste API token>
-
-NEXT_PUBLIC_API_ENDPOINT=https://api.themoviedb.org/3
-NEXT_PUBLIC_API_LANG=fr-FR
-NEXT_PUBLIC_API_KEY=<paste API key>
-NEXT_PUBLIC_API_TOKEN=<paste API token>>
 ```
 
 puis exécuter

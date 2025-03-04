@@ -1,4 +1,4 @@
-import { Person as Model } from '@/app/lib/services/types'
+import { Person as Model } from '@/app/lib/service/models/person'
 import PersonMovies from '@/app/ui/person-movies/person-movies'
 import PersonCard from '../person-card/person-card'
 

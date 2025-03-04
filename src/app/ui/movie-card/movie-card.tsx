@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ImageNotSupported, Star } from '@mui/icons-material'
 import { useMemo } from 'react'
-import { Movie } from '@/app/lib/services/types'
+import { Movie } from '@/app/lib/service/models/movie'
 import Genre from '@/app/ui/genre/genre'
 import MovieVideo from '../movie-video/movie-video'
 import MovieVotes from '../movie-votes/movie-votes'
@@ -39,9 +39,7 @@ export default function MovieCard({
       )}
 
       <div className="flex gap-2">
-        {genres.map(({ name }) => (
-          <Genre key={name} name={name} className="p-2 text-2xl" />
-        ))}
+        {genres.map((genre) => <Genre key={genre} name={genre} className="p-2 text-2xl" />)}
       </div>
       <div className="flex gap-4">
         <div className="flex flex-col gap-2" style={{ width: '350px' }}>

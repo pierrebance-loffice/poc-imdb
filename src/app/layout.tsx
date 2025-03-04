@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import './globals.css'
-import { inter } from './settings'
 
 export const metadata: Metadata = { title: 'MyIMDB', description: 'Movies app' }
+
+const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({
   children,

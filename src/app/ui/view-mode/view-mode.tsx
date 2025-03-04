@@ -19,10 +19,10 @@ const Icon = ({
   )
 }
 
-const ModeSwitcher = (props: {
+export default function ViewMode(props: {
   mode: 'grid' | 'list'
   onChange: () => void
-}) => {
+}) {
   const { mode, onChange } = props
 
   return (
@@ -36,5 +36,3 @@ const ModeSwitcher = (props: {
     </button>
   )
 }
-
-export default ModeSwitcher

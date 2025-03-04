@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Movie as Model } from '@/app/lib/services/types'
+import { Movie as Model } from '@/app/lib/service/models/movie'
 import MovieCard from '../movie-card/movie-card'
 import MoviePeople from '../movie-people/movie-people'
 

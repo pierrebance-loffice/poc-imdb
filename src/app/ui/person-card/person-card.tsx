@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { shuffle } from 'radash'
-import { Person } from '@/app/lib/services/types'
+import { Person } from '@/app/lib/service/models/person'
 import { ImageNotSupported, Star } from '@mui/icons-material'
 import { Chip } from '@mui/material'
 
@@ -60,7 +60,7 @@ export default function PersonCard({
           <div className="inline-block">
             <span className="font-bold">
               {person.birthday.toLocaleString(
-                process.env.NEXT_PUBLIC_API_LANG,
+                process.env.API_LANG,
                 { day: '2-digit', month: '2-digit', year: 'numeric' }
               )}
             </span>

@@ -3,28 +3,53 @@
 import {
   Alert,
   CircularProgress,
-  MenuItem,
   Pagination,
-  Select,
   SelectChangeEvent,
 } from '@mui/material'
-import { ChangeEvent, useCallback, useMemo, useState } from 'react'
-import { useDiscoveries } from '@/app/hooks/discoveries'
+import {
+  ChangeEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useTransition,
+} from 'react'
 import DiscoveriesGrid from '@/app/ui/discoveries-grid/discoveries-grid'
 import DiscoveriesList from '@/app/ui/discoveries-list/discoveries-list'
-import ModeSwitcher from '@/app/ui/mode-switcher/mode-switcher'
+import ViewMode from '@/app/ui/view-mode/view-mode'
+import { fetchDiscoveries } from '@/app/actions'
+import { PaginatedDiscoveries } from '@/app/lib/service/models/discovery'
+import SortingSelector from '../sorting-selector/sorting-selector'
 
-export default function Discoveries() {
-  const [mode, setMode] = useState<'list' | 'grid'>('grid')
+type Props = {
+  discoveries: PaginatedDiscoveries
+  sorting: string
+  apiPage: number
+  displayPage: number
+}
 
-  const [apiPage, setApiPage] = useState(1)
-  const [displayPage, setDisplayPage] = useState(1)
+export default function Discoveries(props: Props) {
+  const [discoveries, setDiscoveries] = useState(props.discoveries)
+  const [mode, setMode] = useState<'grid' | 'list'>('grid')
+  const [apiPage, setApiPage] = useState(props.apiPage)
+  const [displayPage, setDisplayPage] = useState(props.displayPage)
+  const [sorting, setSorting] = useState(props.sorting)
 
-  const [apiSorting, setApiSorting] = useState('popularity.desc')
+  const onSortingChange = (event: SelectChangeEvent<unknown>) => {
+    setSorting(String(event.target.value))
+  }
 
-  const { error, loading, discoveries } = useDiscoveries(apiPage, apiSorting)
+  const onPaginationChange = useCallback((event: ChangeEvent<unknown>, value: number) => {
+    const newApiPage = Math.floor((1 + value) / 2)
+      if (displayPage !== value) {
+        if (newApiPage !== apiPage) {
+          setApiPage(newApiPage)
+        }
+        setDisplayPage(value)
+      }
+  }, [apiPage, displayPage])
 
-  const onChangeMode = useCallback(
+  const onViewModeChange = useCallback(
     () => setMode(mode === 'grid' ? 'list' : 'grid'),
     [mode]
   )
@@ -37,20 +62,18 @@ export default function Discoveries() {
     )
   }, [discoveries, displayPage])
 
-  const handlePaginationChange = useCallback(
-    (event: ChangeEvent<unknown>, value: number) => {
-      const newApiPage = Math.floor((1 + value) / 2)
-      if (displayPage !== value) {
-        if (newApiPage !== apiPage) {
-          setApiPage(newApiPage)
-        }
-        setDisplayPage(value)
-      }
-    },
-    [apiPage, displayPage]
-  )
 
-  if (loading) {
+  const [isPending, startTransition] = useTransition()
+  
+  useEffect(() => {
+    startTransition(async () => {
+      const newDiscoveries = await fetchDiscoveries(apiPage, sorting)
+      setDiscoveries(newDiscoveries)
+    })
+  }, [apiPage, sorting])
+
+
+  if (isPending) {
     return (
       <div className="flex w-full p-4">
         <CircularProgress className="mx-auto" />
@@ -58,41 +81,16 @@ export default function Discoveries() {
     )
   }
 
-  if (error)
-    return (
-      <Alert severity="error" className="m-4">
-        Une erreur est survenue
-      </Alert>
-    )
-
-  if (!displayedDiscoveries.length || !discoveries)
+  if (!discoveries.results.length)
     return <Alert severity="info">Aucun film</Alert>
-
-  const handleSortingChange = (event: SelectChangeEvent<unknown>) =>
-    setApiSorting(String(event.target.value))
 
   return (
     <div className="mb-4 mt-4 flex flex-col justify-between gap-5">
       <h1 className="text-4xl">Les plus populaires</h1>
 
       <div className="flex items-center justify-end rounded bg-zinc-300">
-        <Select
-          value={apiSorting}
-          title="Trier par"
-          onChange={handleSortingChange}
-          className="rounded-full"
-        >
-          <MenuItem value="popularity.desc">
-            Du plus populaire au moins populaire
-          </MenuItem>
-          <MenuItem value="popularity.asc">
-            Du moins populaire au plus populaire
-          </MenuItem>
-          <MenuItem value="title.desc">Ordre alphabétique croissant</MenuItem>
-          <MenuItem value="title.asc">Ordre alphabétique décroissant</MenuItem>
-        </Select>
-
-        <ModeSwitcher mode={mode} onChange={onChangeMode} />
+        <SortingSelector sorting={sorting} onChange={onSortingChange} />
+        <ViewMode mode={mode} onChange={onViewModeChange} />
       </div>
 
       {mode === 'grid' ? (
@@ -104,7 +102,7 @@ export default function Discoveries() {
       <Pagination
         count={discoveries.total_pages * 2}
         page={displayPage}
-        onChange={handlePaginationChange}
+        onChange={onPaginationChange}
         showFirstButton
         showLastButton
         siblingCount={1}

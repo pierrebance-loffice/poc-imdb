@@ -1,5 +1,5 @@
-import { getMovie } from '@/app/lib/services/movies'
-import { getPerson } from '@/app/lib/services/persons'
+import { getMovie } from '@/app/lib/service/api/movie'
+import { getPerson } from '@/app/lib/service/api/person'
 import MovieModal from '@/app/ui/movie-modal/movie-modal'
 import Person from '@/app/ui/person/person'
 
