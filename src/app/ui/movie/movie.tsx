@@ -6,7 +6,7 @@ export default async function Movie({ movie }: { movie: Model }) {
   const { cast, crew } = movie.credits
   const hasCredits = cast.length + crew.length > 0
   return (
-    <div className="mb-4 mt-4 flex flex-col justify-between gap-5">
+    <div className="flex flex-col justify-between gap-5">
       <MovieCard movie={movie} compact={false} />
       {hasCredits && <MoviePeople movie={movie} />}
     </div>

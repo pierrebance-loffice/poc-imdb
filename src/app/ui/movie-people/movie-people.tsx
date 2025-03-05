@@ -1,13 +1,13 @@
 'use client'
 
 import { Movie } from '@app/lib/service/models/movie'
+import Genre from '@app/ui/genre/genre'
 import { ImageNotSupported } from '@mui/icons-material'
 import { Pagination } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
 import { sift } from 'radash'
 import { ChangeEvent, useCallback, useMemo, useState } from 'react'
-import Genre from '@app/ui/genre/genre'
 
 const creditsPagination = 6
 
@@ -49,7 +49,7 @@ export default function MoviePeople({ movie }: { movie: Movie }) {
     <>
       <h2 className="text-2xl">Crédits</h2>
 
-      <div className="flex items-center gap-2 self-center">
+      <div className="flex items-center gap-4 self-center">
         {persons
           .slice((page - 1) * creditsPagination, page * creditsPagination)
           .map((person, index) => (
@@ -62,17 +62,18 @@ export default function MoviePeople({ movie }: { movie: Movie }) {
               {!!person?.profilePath && (
                 <Image
                   src={person?.profilePath?.small}
-                  alt="portrait-mini"
+                  alt="photo-mini"
                   className="rounded"
-                  height={300}
-                  width={200}
+                  height={200}
+                  width={134}
                 />
               )}
 
               {!person?.profilePath && (
                 <div
+                  data-testid="no-photo"
                   className="flex justify-center bg-gray-400 dark:bg-gray-900"
-                  style={{ height: 300, width: 200 }}
+                  style={{ height: 200, width: 134 }}
                 >
                   <ImageNotSupported className="self-center text-6xl dark:text-gray-200" />
                 </div>

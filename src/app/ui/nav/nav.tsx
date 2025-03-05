@@ -8,7 +8,7 @@ import Link from 'next/link'
 
 export default function Nav({ enableButton }: { enableButton: boolean }) {
   return (
-    <nav className="flex items-center gap-3 bg-zinc-300 dark:bg-zinc-800">
+    <nav className="flex w-full items-center gap-3 bg-zinc-300 dark:bg-zinc-800">
       <Image
         src={Logo}
         width={50}

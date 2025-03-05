@@ -1,12 +1,12 @@
 'use client'
 
+import { Person } from '@app/lib/service/models/person'
+import { ImageNotSupported } from '@mui/icons-material'
+import { Pagination } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
 import { sift, unique } from 'radash'
-import { Person } from '@app/lib/service/models/person'
 import { ChangeEvent, useCallback, useMemo, useState } from 'react'
-import { Pagination } from '@mui/material'
-import { ImageNotSupported } from '@mui/icons-material'
 
 const creditsPagination = 6
 
@@ -45,6 +45,7 @@ export default function PersonMovies({ person }: { person: Person }) {
       <div className="flex items-center gap-2 self-center">
         {credits.map((movie) => (
           <Link
+            data-testid={`credits-movie-${movie.id}`}
             key={`credits-movie-${movie.id}`}
             href={`/people/${person.id}/movies/${movie.id}`}
             className="relative text-sm"
@@ -53,19 +54,19 @@ export default function PersonMovies({ person }: { person: Person }) {
               <Image
                 className="rounded bg-black"
                 src={movie?.posterPath?.small}
-                alt="affiche-mini"
-                height={300}
-                width={200}
+                alt="poster-mini"
+                height={200}
+                width={134}
               />
             )}
 
             {!movie?.posterPath && (
               <div
                 className="flex justify-center bg-gray-400 dark:bg-gray-900"
-                style={{ height: 300, width: 200 }}
+                style={{ height: 200, width: 134 }}
               >
                 <ImageNotSupported
-                  test-dataid="pas-d-affiche"
+                  data-testid="no-poster"
                   className="self-center text-6xl dark:text-gray-200"
                 />
               </div>

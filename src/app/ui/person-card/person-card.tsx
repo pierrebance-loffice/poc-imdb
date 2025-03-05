@@ -8,11 +8,11 @@ import { Chip } from '@mui/material'
 export default function PersonCard({
   person,
   compact,
-  role,
+  personRole,
 }: {
   person: Person
   compact: boolean
-  role?: string
+  personRole?: string
 }) {
   const size1 = compact ? 'text-xl' : 'text-4xl'
   const size2 = compact ? 'text-lg' : 'text-xl'
@@ -35,10 +35,10 @@ export default function PersonCard({
         ) : null}
       </h1>
 
-      {!!role && (
+      {!!personRole && (
         <div className="flex items-center text-blue-500">
           <Star />
-          <span className={size2}>{role}</span>
+          <span className={size2}>{personRole}</span>
         </div>
       )}
 
@@ -55,6 +55,7 @@ export default function PersonCard({
           )}
           {!person?.profilePath && (
             <div
+              data-testid="no-photo"
               className="flex justify-center bg-gray-400 dark:bg-gray-900"
               style={{ height: heightPic, width: widthPic }}
             >
@@ -92,12 +93,14 @@ export default function PersonCard({
                 </Link>
               ) : null}
 
-              <Link
-                href={`https://www.imdb.com/name/${person.imdbId}`}
-                className={`${size4} text-blue-500 underline hover:text-blue-800`}
-              >
-                Lien vers la page IMDB de la personne
-              </Link>
+              {!!person.imdbId && (
+                <Link
+                  href={`https://www.imdb.com/name/${person.imdbId}`}
+                  className={`${size4} text-blue-500 underline hover:text-blue-800`}
+                >
+                  Lien vers la page IMDB de la personne
+                </Link>
+              )}
 
               {!!person.images.length && (
                 <>
@@ -107,6 +110,7 @@ export default function PersonCard({
                       .slice(0, 16)
                       .map((image, index) => (
                         <Image
+                          data-testid="photo-mini"
                           src={image.small}
                           key={`person-${person.id}-image-${index}`}
                           width={100}

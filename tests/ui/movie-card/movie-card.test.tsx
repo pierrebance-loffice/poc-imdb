@@ -5,16 +5,18 @@ import { mockMovie } from '@tests/mocks/movie'
 describe('MovieCard component', () => {
   it('renders the poster ', async () => {
     render(<MovieCard movie={mockMovie()} compact={false} />)
-    expect(screen.getByAltText('affiche')).toBeInTheDocument()
-    expect(screen.getByAltText('affiche')).toHaveAttribute(
+    expect(screen.getByAltText('poster')).toBeInTheDocument()
+    expect(screen.getByAltText('poster')).toHaveAttribute(
       'src',
       '/_next/image?url=http%3A%2F%2Flocalhost%3A3000%2Fposter%2F123%2Fbig&w=640&q=75'
     )
   })
 
   it('renders no poster ', async () => {
-    render(<MovieCard movie={mockMovie()} compact={false} />)
-    expect(screen.queryByTestId('pas-d-affiche')).not.toBeInTheDocument()
+    render(
+      <MovieCard movie={mockMovie({ posterPath: undefined })} compact={false} />
+    )
+    expect(screen.getByTestId('no-poster')).toBeInTheDocument()
   })
 
   it('renders person role', async () => {
@@ -99,7 +101,7 @@ describe('MovieCard component', () => {
     )
   })
 
-  it('renders youtube videos only', async () => {
+  it('renders youtube videos', async () => {
     const { container } = render(
       <MovieCard movie={mockMovie()} compact={false} />
     )

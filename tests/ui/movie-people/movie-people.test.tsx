@@ -5,7 +5,7 @@ import { mockMovie, mockMoviePerson } from '@tests/mocks/movie'
 describe('MoviePeople component', () => {
   it('renders credits', async () => {
     render(<MoviePeople movie={mockMovie()} />)
-    expect(screen.getAllByAltText('portrait-mini')).toHaveLength(3)
+    expect(screen.getAllByAltText('photo-mini')).toHaveLength(3)
   })
 
   it('renders credits per batches of 6', async () => {
@@ -13,7 +13,14 @@ describe('MoviePeople component', () => {
       mockMoviePerson({ id })
     )
     render(<MoviePeople movie={mockMovie({ credits: { cast, crew: [] } })} />)
-    expect(screen.getAllByAltText('portrait-mini')).toHaveLength(6)
+    expect(screen.getAllByAltText('photo-mini')).toHaveLength(6)
+  })
+
+  it('renders the person name', async () => {
+    render(<MoviePeople movie={mockMovie()} />)
+    expect(
+      within(screen.getByTestId('credits-person-0')).getByText('Mr Director')
+    ).toBeInTheDocument()
   })
 
   it('renders the person tag for director', async () => {

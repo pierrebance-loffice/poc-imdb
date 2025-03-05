@@ -57,7 +57,7 @@ export default function MovieCard({
           {!!posterPath && (
             <Image
               src={posterPath.big}
-              alt="affiche"
+              alt="poster"
               className="flex rounded"
               height={heightPic}
               width={widthPic}
@@ -65,6 +65,7 @@ export default function MovieCard({
           )}
           {!posterPath && (
             <div
+              data-testid="no-poster"
               className="flex justify-center bg-gray-400 dark:bg-gray-900"
               style={{ height: heightPic, width: widthPic }}
             >

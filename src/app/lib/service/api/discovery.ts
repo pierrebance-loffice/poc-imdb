@@ -13,9 +13,17 @@ export async function discoverMovies(
   page: number,
   sorting: string
 ): Promise<PaginatedDiscoveries> {
-  const genres = await getGenres()
-  const url = `${process.env.API_ENDPOINT}/discover/movie?include_adult=false&include_video=false&language=${process.env.API_LANG}&api_key=${process.env.API_KEY}&page=${page}&sort_by=${sorting}`
+  const query = [
+    `page=${page}`,
+    `sort_by=${sorting}`,
+    `language=${process.env.API_LANG}`,
+    `api_key=${process.env.API_KEY}`,
+    `include_adult=false`,
+    `include_video=false`,
+  ]
+  const url = `${process.env.API_ENDPOINT}/discover/movie?${query.join('&')}`
   const { data } = await axios.get<PaginatedApiDiscoveries>(url)
+  const genres = await getGenres()
   return {
     ...data,
     results: data.results.map((discovery) => toDiscovery(discovery, genres)),

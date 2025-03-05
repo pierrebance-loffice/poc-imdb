@@ -8,11 +8,12 @@ export default function BaseLayout({
   enableButton?: boolean
 }) {
   return (
-    <main className="flex min-h-screen flex-col">
+    <main className="flex flex-col gap-4">
       <Nav enableButton={enableButton ?? false} />
       <div className="mx-auto flex w-full max-w-7xl flex-col justify-between gap-5 text-sm">
         {children}
       </div>
+      <footer className="text-center">MyIMDB {new Date().getFullYear()}</footer>
     </main>
   )
 }

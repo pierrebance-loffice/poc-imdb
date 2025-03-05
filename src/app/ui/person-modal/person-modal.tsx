@@ -27,7 +27,7 @@ export default function PersonModal({
       <PersonCard
         person={person}
         compact={true}
-        role={person ? `${movie?.title}: ${role}` : role}
+        personRole={person ? `${movie?.title}: ${role}` : role}
       />
       <span className="grow" />
       <Link

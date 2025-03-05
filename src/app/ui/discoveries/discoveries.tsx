@@ -86,7 +86,7 @@ export default function Discoveries(props: Props) {
     return <Alert severity="info">Aucun film</Alert>
 
   return (
-    <div className="mb-4 mt-4 flex flex-col justify-between gap-5">
+    <div className="flex flex-col justify-between gap-5">
       <h1 className="text-4xl">Les plus populaires</h1>
 
       <div className="flex items-center justify-end rounded bg-zinc-300">
