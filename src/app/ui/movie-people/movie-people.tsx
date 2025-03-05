@@ -1,13 +1,13 @@
 'use client'
 
+import { Movie } from '@app/lib/service/models/movie'
+import { ImageNotSupported } from '@mui/icons-material'
+import { Pagination } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
 import { sift } from 'radash'
-import { Movie } from '@/app/lib/service/models/movie'
-import Genre from '../genre/genre'
 import { ChangeEvent, useCallback, useMemo, useState } from 'react'
-import { Pagination } from '@mui/material'
-import { ImageNotSupported } from '@mui/icons-material'
+import Genre from '@app/ui/genre/genre'
 
 const creditsPagination = 6
 
@@ -18,7 +18,7 @@ export default function MoviePeople({ movie }: { movie: Movie }) {
   )
   const actors = useMemo(
     () =>
-      movie.credits.cast
+      movie?.credits?.cast
         .sort((person1, person2) =>
           person1.popularity > person2.popularity ? -1 : 1
         )
@@ -54,6 +54,7 @@ export default function MoviePeople({ movie }: { movie: Movie }) {
           .slice((page - 1) * creditsPagination, page * creditsPagination)
           .map((person, index) => (
             <Link
+              data-testid={`credits-person-${index}`}
               key={`credits-person-${index}`}
               href={`/movies/${movie.id}/people/${person.id}`}
               className="relative text-sm"
@@ -61,7 +62,7 @@ export default function MoviePeople({ movie }: { movie: Movie }) {
               {!!person?.profilePath && (
                 <Image
                   src={person?.profilePath?.small}
-                  alt="affiche"
+                  alt="portrait-mini"
                   className="rounded"
                   height={300}
                   width={200}
@@ -81,17 +82,25 @@ export default function MoviePeople({ movie }: { movie: Movie }) {
                 <div className="absolute bottom-0 left-0 right-0 top-0 text-ellipsis p-2 text-center text-lg font-bold text-white ">
                   <div className="absolute bottom-0 left-0 right-0 top-0 p-2 text-center opacity-0 hover:opacity-100">
                     <div className="absolute bottom-0 left-0 right-0 top-0 bg-black p-0 opacity-50"></div>
-                    <div className="absolute bottom-0 left-0 right-0 top-0 mt-1 opacity-0 shadow-lg hover:opacity-100">
+                    <div
+                      className="absolute bottom-0 left-0 right-0 top-0 mt-1 opacity-0 shadow-lg hover:opacity-100"
+                      data-testid="person-details"
+                    >
                       {person.name}
                     </div>
-                    {!!director && index === 0 && (
-                      <div className="absolute bottom-0 left-0 right-0 p-2 text-center text-xl font-bold">
-                        <Genre
-                          name="Director"
-                          className="inline text-ellipsis p-2 text-xs font-bold"
-                        />
-                      </div>
-                    )}
+                    {!!director &&
+                      director.id === person.id &&
+                      !!person.job && (
+                        <div
+                          data-testid="person-job"
+                          className="absolute bottom-0 left-0 right-0 p-2 text-center text-xl font-bold"
+                        >
+                          <Genre
+                            name="Director"
+                            className="inline text-ellipsis p-2 text-xs font-bold"
+                          />
+                        </div>
+                      )}
                   </div>
                 </div>
               </div>

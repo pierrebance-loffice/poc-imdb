@@ -1,6 +1,6 @@
 import { Skeleton } from '@mui/material'
 
-import MovieGridSkeleton from '@/app/ui/skeletons/movie-grid/movie-grid'
+import MovieGridSkeleton from '@app/ui/skeletons/movie-grid/movie-grid'
 
 export default function MoviesSkeleton() {
   return (

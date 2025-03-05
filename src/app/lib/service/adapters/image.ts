@@ -1,5 +1,5 @@
-import { API_IMAGE_BASE_URL } from '@/app/lib/constants'
-import { Images } from '@/app/lib/service/models/image'
+import { API_IMAGE_BASE_URL } from '@app/lib/constants'
+import { Images } from '@app/lib/service/models/image'
 
 export function toImages(path: string): Images {
   return {

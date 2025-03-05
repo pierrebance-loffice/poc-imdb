@@ -1,7 +1,16 @@
-import { toImages } from '@/app/lib/service/adapters/image'
-import { IApiPerson, IApiPersonMovie, Person, PersonMovie } from '@/app/lib/service/models/person'
+import { toImages } from '@app/lib/service/adapters/image'
+import {
+  IApiPerson,
+  IApiPersonMovie,
+  Person,
+  PersonMovie,
+} from '@app/lib/service/models/person'
 
-export function toPersonMovie({id, poster_path, title}: IApiPersonMovie): PersonMovie {
+export function toPersonMovie({
+  id,
+  poster_path,
+  title,
+}: IApiPersonMovie): PersonMovie {
   return {
     id,
     title,

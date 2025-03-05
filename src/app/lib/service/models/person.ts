@@ -1,4 +1,4 @@
-import { Images } from "./image"
+import { Images } from '@app/lib/service/models/image'
 
 export interface IApiPersonMovie {
   id: number

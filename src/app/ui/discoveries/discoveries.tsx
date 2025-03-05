@@ -1,5 +1,11 @@
 'use client'
 
+import { fetchDiscoveries } from '@app/actions'
+import { PaginatedDiscoveries } from '@app/lib/service/models/discovery'
+import DiscoveriesGrid from '@app/ui/discoveries-grid/discoveries-grid'
+import DiscoveriesList from '@app/ui/discoveries-list/discoveries-list'
+import SortingSelector from '@app/ui/sorting-selector/sorting-selector'
+import ViewMode from '@app/ui/view-mode/view-mode'
 import {
   Alert,
   CircularProgress,
@@ -14,12 +20,6 @@ import {
   useState,
   useTransition,
 } from 'react'
-import DiscoveriesGrid from '@/app/ui/discoveries-grid/discoveries-grid'
-import DiscoveriesList from '@/app/ui/discoveries-list/discoveries-list'
-import ViewMode from '@/app/ui/view-mode/view-mode'
-import { fetchDiscoveries } from '@/app/actions'
-import { PaginatedDiscoveries } from '@/app/lib/service/models/discovery'
-import SortingSelector from '../sorting-selector/sorting-selector'
 
 type Props = {
   discoveries: PaginatedDiscoveries
@@ -39,15 +39,18 @@ export default function Discoveries(props: Props) {
     setSorting(String(event.target.value))
   }
 
-  const onPaginationChange = useCallback((event: ChangeEvent<unknown>, value: number) => {
-    const newApiPage = Math.floor((1 + value) / 2)
+  const onPaginationChange = useCallback(
+    (event: ChangeEvent<unknown>, value: number) => {
+      const newApiPage = Math.floor((1 + value) / 2)
       if (displayPage !== value) {
         if (newApiPage !== apiPage) {
           setApiPage(newApiPage)
         }
         setDisplayPage(value)
       }
-  }, [apiPage, displayPage])
+    },
+    [apiPage, displayPage]
+  )
 
   const onViewModeChange = useCallback(
     () => setMode(mode === 'grid' ? 'list' : 'grid'),
@@ -62,16 +65,14 @@ export default function Discoveries(props: Props) {
     )
   }, [discoveries, displayPage])
 
-
   const [isPending, startTransition] = useTransition()
-  
+
   useEffect(() => {
     startTransition(async () => {
       const newDiscoveries = await fetchDiscoveries(apiPage, sorting)
       setDiscoveries(newDiscoveries)
     })
   }, [apiPage, sorting])
-
 
   if (isPending) {
     return (

@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { sift, unique } from 'radash'
-import { Person } from '@/app/lib/service/models/person'
+import { Person } from '@app/lib/service/models/person'
 import { ChangeEvent, useCallback, useMemo, useState } from 'react'
 import { Pagination } from '@mui/material'
 import { ImageNotSupported } from '@mui/icons-material'
@@ -53,7 +53,7 @@ export default function PersonMovies({ person }: { person: Person }) {
               <Image
                 className="rounded bg-black"
                 src={movie?.posterPath?.small}
-                alt="affiche"
+                alt="affiche-mini"
                 height={300}
                 width={200}
               />
@@ -64,7 +64,10 @@ export default function PersonMovies({ person }: { person: Person }) {
                 className="flex justify-center bg-gray-400 dark:bg-gray-900"
                 style={{ height: 300, width: 200 }}
               >
-                <ImageNotSupported className="self-center text-6xl dark:text-gray-200" />
+                <ImageNotSupported
+                  test-dataid="pas-d-affiche"
+                  className="self-center text-6xl dark:text-gray-200"
+                />
               </div>
             )}
 

@@ -1,22 +1,22 @@
 'use client'
 
+import { Movie } from '@app/lib/service/models/movie'
+import Genre from '@app/ui/genre/genre'
+import MovieVideo from '@app/ui/movie-video/movie-video'
+import MovieVotes from '@app/ui/movie-votes/movie-votes'
+import { ImageNotSupported, Star } from '@mui/icons-material'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ImageNotSupported, Star } from '@mui/icons-material'
 import { useMemo } from 'react'
-import { Movie } from '@/app/lib/service/models/movie'
-import Genre from '@/app/ui/genre/genre'
-import MovieVideo from '../movie-video/movie-video'
-import MovieVotes from '../movie-votes/movie-votes'
 
 export default function MovieCard({
   movie,
   compact,
-  role,
+  personRole,
 }: {
   movie: Movie
   compact: boolean
-  role?: string
+  personRole?: string
 }) {
   const { posterPath, title, genres } = movie
   const videos = useMemo(
@@ -24,38 +24,49 @@ export default function MovieCard({
       (movie.videos || []).filter(({ site }) => site === 'YouTube').slice(0, 4),
     [movie]
   )
+
+  const size1 = compact ? 'text-xl' : 'text-4xl'
+  const size2 = compact ? 'text-lg' : 'text-xl'
+  const size3 = compact ? 'text-sm' : 'text-lg'
+  const size4 = compact ? 'text-xs' : 'text-sm'
+
+  const widthPic = compact ? 200 : 300
+  const heightPic = compact ? 300 : 450
+
   return (
     <>
-      <h1 className="text-4xl">
+      <h1 className={size1}>
         {title}
         {!!movie.releaseDate && ` (${movie.releaseDate.getFullYear()})`}
       </h1>
 
-      {!!role && (
+      {!!personRole && (
         <div className="flex items-center text-blue-500">
           <Star />
-          <span className="text-xl italic">{role}</span>
+          <span className={size2}>{personRole}</span>
         </div>
       )}
 
-      <div className="flex gap-2">
-        {genres.map((genre) => <Genre key={genre} name={genre} className="p-2 text-2xl" />)}
+      <div className={`flex gap-2 ${size3}`}>
+        {genres.map((genre) => (
+          <Genre key={genre} name={genre} className={`p-2 ${size2}`} />
+        ))}
       </div>
       <div className="flex gap-4">
-        <div className="flex flex-col gap-2" style={{ width: '350px' }}>
+        <div className="flex flex-col gap-2" style={{ width: widthPic }}>
           {!!posterPath && (
             <Image
               src={posterPath.big}
               alt="affiche"
               className="flex rounded"
-              height={450}
-              width={300}
+              height={heightPic}
+              width={widthPic}
             />
           )}
           {!posterPath && (
             <div
               className="flex justify-center bg-gray-400 dark:bg-gray-900"
-              style={{ height: 450, width: 300 }}
+              style={{ height: heightPic, width: widthPic }}
             >
               <ImageNotSupported className="self-center text-6xl dark:text-gray-200" />
             </div>
@@ -68,13 +79,14 @@ export default function MovieCard({
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 text-lg">
+        <div className={`flex flex-col gap-2 ${size3}`}>
           {!!movie.tagline && <span className="italic">{movie.tagline}</span>}
 
           {!!movie.overview && (
             <div className="inline-block">
               <span className="font-bold">Résumé du film</span>
-              <span> - {movie.overview}</span>
+              <span> - </span>
+              <span>{movie.overview}</span>
             </div>
           )}
 
@@ -83,7 +95,7 @@ export default function MovieCard({
               {movie.homepage && (
                 <Link
                   href={movie.homepage}
-                  className="text-sm text-blue-500 underline hover:text-blue-800"
+                  className={`${size4} text-blue-500 underline hover:text-blue-800`}
                 >
                   Lien vers le site du film
                 </Link>
@@ -92,7 +104,7 @@ export default function MovieCard({
               {!!movie.imdbId && (
                 <Link
                   href={`https://www.imdb.com/title/${movie.imdbId}`}
-                  className="text-sm text-blue-500 underline hover:text-blue-800"
+                  className={`${size4} text-blue-500 underline hover:text-blue-800`}
                 >
                   Lien vers la page IMDB du film
                 </Link>

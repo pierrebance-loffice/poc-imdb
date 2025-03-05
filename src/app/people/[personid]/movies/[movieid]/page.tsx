@@ -1,7 +1,7 @@
-import { getMovie } from '@/app/lib/service/api/movie'
-import { getPerson } from '@/app/lib/service/api/person'
-import MovieModal from '@/app/ui/movie-modal/movie-modal'
-import Person from '@/app/ui/person/person'
+import { getMovie } from '@app/lib/service/api/movie'
+import { getPerson } from '@app/lib/service/api/person'
+import MovieModal from '@app/ui/movie-modal/movie-modal'
+import Person from '@app/ui/person/person'
 
 type Props = { params: { movieid: string; personid: string } }
 

@@ -1,4 +1,4 @@
-import { Video } from '@/app/lib/service/models/video'
+import { Video } from '@app/lib/service/models/video'
 
 export default function MovieVideo({ video }: { video: Video }) {
   return (

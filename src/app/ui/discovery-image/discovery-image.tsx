@@ -1,6 +1,6 @@
 import { ImageNotSupported } from '@mui/icons-material'
 import { CardMedia } from '@mui/material'
-import { Discovery } from '@/app/lib/service/models/discovery'
+import { Discovery } from '@app/lib/service/models/discovery'
 
 export default function DiscoveryImage({
   discovery,

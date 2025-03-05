@@ -2,7 +2,7 @@ import { MenuItem, Select, SelectChangeEvent } from '@mui/material'
 
 export default function SortingSelector({
   sorting,
-  onChange
+  onChange,
 }: {
   sorting: string
   onChange: (event: SelectChangeEvent<unknown>) => void

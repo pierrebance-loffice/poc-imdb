@@ -1,4 +1,4 @@
-import Genre from '@/app/ui/genre/genre'
+import Genre from '@app/ui/genre/genre'
 
 export default async function DiscoveryGenres({
   genres,

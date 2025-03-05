@@ -1,4 +1,4 @@
-import Nav from '../nav/nav'
+import Nav from '@app/ui/nav/nav'
 
 export default function BaseLayout({
   children,

@@ -1,10 +1,10 @@
 'use client'
 
+import ThemeMode from '@app/ui/theme-mode/theme-mode'
+import Logo from '@assets/logo.svg'
+import MovieIcon from '@assets/movie-icon.svg'
 import Image from 'next/image'
 import Link from 'next/link'
-import ThemeMode from '@/app/ui/theme-mode/theme-mode'
-import Logo from '../../../../assets/logo.svg'
-import MovieIcon from '../../../../assets/movie-icon.svg'
 
 export default function Nav({ enableButton }: { enableButton: boolean }) {
   return (

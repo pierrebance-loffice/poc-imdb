@@ -1,6 +1,6 @@
 import { Grid2 } from '@mui/material'
-import { Discovery } from '@/app/lib/service/models/discovery'
-import DiscoveryCard from '@/app/ui/discovery-card/discovery-card'
+import { Discovery } from '@app/lib/service/models/discovery'
+import DiscoveryCard from '@app/ui/discovery-card/discovery-card'
 
 export default function DiscoveriesGrid({
   discoveries,

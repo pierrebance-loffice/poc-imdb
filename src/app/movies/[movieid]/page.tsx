@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { getMovie } from '@/app/lib/service/api/movie'
-import Movie from '@/app/ui/movie/movie'
+import { getMovie } from '@app/lib/service/api/movie'
+import Movie from '@app/ui/movie/movie'
 import { Metadata } from 'next'
 
 type Props = {

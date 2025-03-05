@@ -1,5 +1,5 @@
-import { Paginated } from "@/app/lib/service/utils"
-import { Images } from "@/app/lib/service/models/image"
+import { Paginated } from '@app/lib/service/utils'
+import { Images } from '@app/lib/service/models/image'
 
 export interface IApiDiscovery {
   id: string
@@ -11,7 +11,7 @@ export interface IApiDiscovery {
   video: boolean
   vote_average: number
   vote_count: number
-  genre_ids: number[]
+  genre_ids?: number[]
 }
 
 export type Discovery = {
@@ -24,7 +24,7 @@ export type Discovery = {
   video: boolean
   voteAverage: number
   voteCount: number
-  genres: string[] 
+  genres: string[]
 }
 
 export type PaginatedDiscoveries = Paginated<Discovery[]>

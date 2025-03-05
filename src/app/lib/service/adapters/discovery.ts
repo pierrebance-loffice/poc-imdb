@@ -1,6 +1,6 @@
+import { toImages } from '@app/lib/service/adapters/image'
+import { Discovery, IApiDiscovery } from '@app/lib/service/models/discovery'
 import { sift } from 'radash'
-import { Discovery, IApiDiscovery } from '@/app/lib/service/models/discovery'
-import { toImages } from '@/app/lib/service/adapters/image'
 
 function toDiscovery(
   discovery: IApiDiscovery,
@@ -28,7 +28,9 @@ function toDiscovery(
     video,
     voteAverage,
     voteCount,
-    genres: sift(discovery.genre_ids.map((genreId) => genres[genreId])).sort(),
+    genres: sift(
+      (discovery.genre_ids || []).map((genreId) => genres[genreId])
+    ).sort(),
   }
 }
 

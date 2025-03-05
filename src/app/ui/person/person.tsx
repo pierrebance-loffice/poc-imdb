@@ -1,6 +1,6 @@
-import { Person as Model } from '@/app/lib/service/models/person'
-import PersonMovies from '@/app/ui/person-movies/person-movies'
-import PersonCard from '../person-card/person-card'
+import { Person as Model } from '@app/lib/service/models/person'
+import PersonCard from '@app/ui/person-card/person-card'
+import PersonMovies from '@app/ui/person-movies/person-movies'
 
 export default function Person({ person }: { person: Model }) {
   return (

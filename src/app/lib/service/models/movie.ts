@@ -1,6 +1,6 @@
-import { Images } from "./image"
-import { IApiKeywords } from "./keyword"
-import { IApiVideo, Video } from "./video"
+import { Images } from '@app/lib/service/models/image'
+import { IApiKeywords } from '@app/lib/service/models/keyword'
+import { IApiVideo, Video } from '@app/lib/service/models/video'
 
 export interface IApiMoviePerson {
   id: number

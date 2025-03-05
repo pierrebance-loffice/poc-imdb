@@ -4,7 +4,7 @@ import { DarkMode, LightMode } from '@mui/icons-material'
 import { Divider } from '@mui/material'
 import { useState, useEffect } from 'react'
 
-export default function ThemeMode(){
+export default function ThemeMode() {
   const [isDarkTheme, setIsDarkTheme] = useState(
     typeof window !== 'undefined' &&
       window.localStorage.getItem('theme') === 'dark'

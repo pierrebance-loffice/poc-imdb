@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation'
 import axios from 'axios'
 import { cache } from 'react'
-import { toMovie } from '@/app/lib/service/adapters/movie'
-import { IApiMovie, Movie } from '@/app/lib/service/models/movie'
+import { toMovie } from '@app/lib/service/adapters/movie'
+import { IApiMovie, Movie } from '@app/lib/service/models/movie'
 
 export const getMovie = cache(async (id: string): Promise<Movie> => {
   const extra = ['keywords', 'credits', 'images', 'keywords', 'videos']

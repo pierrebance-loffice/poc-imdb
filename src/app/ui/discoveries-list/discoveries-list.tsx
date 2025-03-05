@@ -1,5 +1,5 @@
-import { Discovery } from '@/app/lib/service/models/discovery'
-import DiscoveryRow from '@/app/ui/discovery-row/discovery-row'
+import { Discovery } from '@app/lib/service/models/discovery'
+import DiscoveryRow from '@app/ui/discovery-row/discovery-row'
 
 export default function DiscoveriesList({
   discoveries,

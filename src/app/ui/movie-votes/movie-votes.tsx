@@ -1,5 +1,5 @@
-import { Discovery } from '@/app/lib/service/models/discovery'
-import { Movie } from '@/app/lib/service/models/movie'
+import { Discovery } from '@app/lib/service/models/discovery'
+import { Movie } from '@app/lib/service/models/movie'
 import { Rating } from '@mui/material'
 
 export default function MovieVotes(props: {

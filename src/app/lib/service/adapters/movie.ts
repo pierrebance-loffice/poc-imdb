@@ -1,14 +1,26 @@
-import { toImages } from '@/app/lib/service/adapters/image'
-import { IApiMovie, IApiMoviePerson, Movie, MoviePerson } from '@/app/lib/service/models/movie'
+import { toImages } from '@app/lib/service/adapters/image'
+import {
+  IApiMovie,
+  IApiMoviePerson,
+  Movie,
+  MoviePerson,
+} from '@app/lib/service/models/movie'
 
-export function toPersonMovie({id, name, popularity, profile_path, character, job}: IApiMoviePerson): MoviePerson {
+export function toPersonMovie({
+  id,
+  name,
+  popularity,
+  profile_path,
+  character,
+  job,
+}: IApiMoviePerson): MoviePerson {
   return {
     id,
     name,
     popularity,
     profilePath: profile_path ? toImages(profile_path) : undefined,
     character: character || undefined,
-    job: job || undefined
+    job: job || undefined,
   }
 }
 
