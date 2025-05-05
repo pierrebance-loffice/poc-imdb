@@ -19,11 +19,7 @@ export default function MovieCard({
   personRole?: string
 }) {
   const { posterPath, title, genres } = movie
-  const videos = useMemo(
-    () =>
-      (movie.videos || []).filter(({ site }) => site === 'YouTube').slice(0, 4),
-    [movie]
-  )
+  const videos = useMemo(() => (movie.videos || []).filter(({ site }) => site === 'YouTube').slice(0, 4), [movie])
 
   const size1 = compact ? 'text-xl' : 'text-4xl'
   const size2 = compact ? 'text-lg' : 'text-xl'
@@ -55,13 +51,7 @@ export default function MovieCard({
       <div className="flex gap-4">
         <div className="flex flex-col gap-2" style={{ width: widthPic }}>
           {!!posterPath && (
-            <Image
-              src={posterPath.big}
-              alt="poster"
-              className="flex rounded"
-              height={heightPic}
-              width={widthPic}
-            />
+            <Image src={posterPath.big} alt="poster" className="flex rounded" height={heightPic} width={widthPic} />
           )}
           {!posterPath && (
             <div
@@ -72,10 +62,7 @@ export default function MovieCard({
               <ImageNotSupported className="self-center text-6xl dark:text-gray-200" />
             </div>
           )}
-          <div
-            className="flex items-center justify-between"
-            style={{ width: '300px' }}
-          >
+          <div className="flex items-center justify-between" style={{ width: '300px' }}>
             <MovieVotes movie={movie} size="large" />
           </div>
         </div>
@@ -94,10 +81,7 @@ export default function MovieCard({
           {!compact && (
             <>
               {movie.homepage && (
-                <Link
-                  href={movie.homepage}
-                  className={`${size4} text-blue-500 underline hover:text-blue-800`}
-                >
+                <Link href={movie.homepage} className={`${size4} text-blue-500 underline hover:text-blue-800`}>
                   Lien vers le site du film
                 </Link>
               )}
@@ -115,10 +99,7 @@ export default function MovieCard({
                 <>
                   <h3 className="font-xl mt-4">Vidéos</h3>
                   <div className="inline-flex items-start gap-2">
-                    {!!videos.length &&
-                      videos.map((video) => (
-                        <MovieVideo key={video.key} video={video} />
-                      ))}
+                    {!!videos.length && videos.map((video) => <MovieVideo key={video.key} video={video} />)}
                   </div>
                 </>
               )}

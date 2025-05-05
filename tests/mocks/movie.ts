@@ -1,8 +1,6 @@
 import { Movie, MoviePerson } from '@app/lib/service/models/movie'
 
-export const mockMoviePerson = (
-  overrides?: Partial<MoviePerson>
-): MoviePerson => {
+export const mockMoviePerson = (overrides?: Partial<MoviePerson>): MoviePerson => {
   return {
     id: 1,
     name: 'Smeagol',

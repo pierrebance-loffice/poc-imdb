@@ -11,30 +11,13 @@ import { ChangeEvent, useCallback, useMemo, useState } from 'react'
 const creditsPagination = 6
 
 export default function PersonMovies({ person }: { person: Person }) {
-  const movies = useMemo(
-    () =>
-      unique(
-        sift([...person.credits.cast, ...person.credits.crew]),
-        ({ id }) => id
-      ),
-    [person]
-  )
+  const movies = useMemo(() => unique(sift([...person.credits.cast, ...person.credits.crew]), ({ id }) => id), [person])
 
-  const total = useMemo(
-    () => Math.ceil(movies.length / creditsPagination),
-    [movies.length]
-  )
+  const total = useMemo(() => Math.ceil(movies.length / creditsPagination), [movies.length])
   const [page, setPage] = useState(1)
-  const credits = useMemo(
-    () =>
-      movies.slice((page - 1) * creditsPagination, page * creditsPagination),
-    [page, movies]
-  )
+  const credits = useMemo(() => movies.slice((page - 1) * creditsPagination, page * creditsPagination), [page, movies])
 
-  const handlePaginationChange = useCallback(
-    (event: ChangeEvent<unknown>, value: number) => setPage(value),
-    [setPage]
-  )
+  const handlePaginationChange = useCallback((event: ChangeEvent<unknown>, value: number) => setPage(value), [setPage])
 
   if (!movies.length) return
 
@@ -61,14 +44,8 @@ export default function PersonMovies({ person }: { person: Person }) {
             )}
 
             {!movie?.posterPath && (
-              <div
-                className="flex justify-center bg-gray-400 dark:bg-gray-900"
-                style={{ height: 200, width: 134 }}
-              >
-                <ImageNotSupported
-                  data-testid="no-poster"
-                  className="self-center text-6xl dark:text-gray-200"
-                />
+              <div className="flex justify-center bg-gray-400 dark:bg-gray-900" style={{ height: 200, width: 134 }}>
+                <ImageNotSupported data-testid="no-poster" className="self-center text-6xl dark:text-gray-200" />
               </div>
             )}
 

@@ -45,13 +45,7 @@ export default function PersonCard({
       <div className="flex gap-4">
         <div className="flex flex-col" style={{ minWidth: widthPic }}>
           {!!person?.profilePath && (
-            <Image
-              src={person.profilePath.big}
-              alt="photo"
-              className="rounded"
-              height={heightPic}
-              width={widthPic}
-            />
+            <Image src={person.profilePath.big} alt="photo" className="rounded" height={heightPic} width={widthPic} />
           )}
           {!person?.profilePath && (
             <div
@@ -85,10 +79,7 @@ export default function PersonCard({
           {!compact && (
             <>
               {person.homepage ? (
-                <Link
-                  href={person.homepage}
-                  className={`${size4} text-blue-500 underline hover:text-blue-800`}
-                >
+                <Link href={person.homepage} className={`${size4} text-blue-500 underline hover:text-blue-800`}>
                   Lien vers le site de la personne
                 </Link>
               ) : null}

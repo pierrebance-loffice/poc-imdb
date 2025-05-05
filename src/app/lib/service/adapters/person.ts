@@ -1,16 +1,7 @@
 import { toImages } from '@app/lib/service/adapters/image'
-import {
-  IApiPerson,
-  IApiPersonMovie,
-  Person,
-  PersonMovie,
-} from '@app/lib/service/models/person'
+import { IApiPerson, IApiPersonMovie, Person, PersonMovie } from '@app/lib/service/models/person'
 
-export function toPersonMovie({
-  id,
-  poster_path,
-  title,
-}: IApiPersonMovie): PersonMovie {
+export function toPersonMovie({ id, poster_path, title }: IApiPersonMovie): PersonMovie {
   return {
     id,
     title,
@@ -42,9 +33,7 @@ function toPerson(person: IApiPerson): Person {
     knownForDepartment,
     job: job || undefined,
     character: character || undefined,
-    images: (
-      (person.images?.profiles || []).map(({ file_path }) => file_path) || []
-    ).map(toImages),
+    images: ((person.images?.profiles || []).map(({ file_path }) => file_path) || []).map(toImages),
     credits: {
       cast: (person?.credits?.cast || []).map(toPersonMovie),
       crew: (person?.credits?.crew || []).map(toPersonMovie),

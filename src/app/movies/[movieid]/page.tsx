@@ -8,12 +8,7 @@ type Props = {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const {
-    title,
-    keywords,
-    overview: description,
-    posterPath,
-  } = await getMovie(params.movieid)
+  const { title, keywords, overview: description, posterPath } = await getMovie(params.movieid)
   return {
     title,
     keywords,

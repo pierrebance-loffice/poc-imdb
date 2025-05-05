@@ -1,56 +1,72 @@
-# MyIMDB - POC Numspot
+# MyIMDB - NextJS POC
 
 ## Consignes
 
-- [Consignes générales](./docs/index.md)
-- [Page d'accueil](./docs/1-accueil.pdf)
-- [Page des films](./docs/2-films.pdf)
-- [Page des personnes](./docs/3-personnes.pdf)
+- [Main guidelines](./docs/index.md)
+- [Homepage](./docs/1-accueil.pdf)
+- [Movie page](./docs/2-films.pdf)
+- [Person page](./docs/3-personnes.pdf)
 
 
 ## Navigation
 
-### 1. Accueil
+### 1. Homepage
 
-![accueil](./images/accueil.png)
+![Homepage](./images/accueil.png)
 
-La route `/` appelle l'API de `https://api.themoviedb.org/3/discover` pour lister / trier /pagier des films
+The main route `/` makes calls to the `https://api.themoviedb.org/3/discover` API il order to list and sort paginated movies.
 
-Cliquer sur un film
+Play with the light / dark mode toggle button!
 
-### 2. Page d'un film
+Play with the sorting and pagination!
 
-Cette page utilise l'endpoint `https://api.themoviedb.org/3/movie` de l'API
+Click on a  movie!
 
-![film-1](./images/film.png)
+### 2. Movie page
 
-Si on clique sur une personnes dans la section `Crédits`, alors une modale s'ouvre et l'url devient `/movies/123/people/456`
+The movie route is `/movies/<id>`
 
-![film-2](./images/film-et-modale.png)
+The movie page uses the `https://api.themoviedb.org/3/movie` API endpoint to fetch details about a movie, including credits (people).
 
-Depuis la modale un lien permet d'accéder à la page d'une personne (Réalisateur ou  acteurs)
+![movie-1](./images/film.png)
 
-### 3. Page d'une personne
+When clicking on a person in the `Crédits`
+- a `Modal` opens without loading a new page
+- URL becomes `/movies/<id>/people/<id>`
 
-Cette page utilise l'endpoint `https://api.themoviedb.org/3/person` de l'API
+![movie-2](./images/film-et-modale.png)
 
-![personne-1](./images/personne.png)
+Refreshing the page should lead to a page with the same layout showing 
+- The movie in the background
+- The selected person in a modal
 
-Si on clique sur un film dans la section `Crédits`, alors une modale s'ouvre et l'url devient `/people/456/movies/123`
+A link in the modal makes it possible to view the page of this person.
 
-![personne-2](./images/personne-et-modale.png)
+Click on it!
 
-Depuis la modale un lien permet d'accéder à la page d'une personne (Réalisateur ou  acteurs)
+### 3. Person page
 
-### Commentaire
+The person route is `/people/<id>`
 
-A mon avis je m'y prend pas exactement comme il faut.
-Les navigations sont parfois pénibles.
+This page calls the `https://api.themoviedb.org/3/person` API endpoint to fetch details about a person, including credits (movies).
+
+![person-1](./images/personne.png)
+
+When clicking on a movie in the `Crédits`
+- a `Modal` opens without loading a new page
+- URL becomes `/movies/<id>/people/<id>`
+
+![person-2](./images/personne-et-modale.png)
+
+Refreshing the page should lead to a page with the same layout showing 
+- The person in the background
+- The selected movie in a modal
 
 
-## Démarrage
 
-Créer un fichier `.env` à la racine du projet
+## Startup
+
+Create a `.env` file at the root of the project
 
 ```.env
 API_ENDPOINT=https://api.themoviedb.org/3
@@ -58,10 +74,16 @@ API_LANG=fr-FR
 API_KEY=<paste API key>
 ```
 
-puis exécuter
+Then execute these commands
 
 ```.sh
 pnpm install
 pnpm build
 pnpm start
+```
+
+Run tests with 
+
+```.sh
+pnpm test
 ```

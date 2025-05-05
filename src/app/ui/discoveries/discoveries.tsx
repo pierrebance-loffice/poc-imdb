@@ -6,20 +6,8 @@ import DiscoveriesGrid from '@app/ui/discoveries-grid/discoveries-grid'
 import DiscoveriesList from '@app/ui/discoveries-list/discoveries-list'
 import SortingSelector from '@app/ui/sorting-selector/sorting-selector'
 import ViewMode from '@app/ui/view-mode/view-mode'
-import {
-  Alert,
-  CircularProgress,
-  Pagination,
-  SelectChangeEvent,
-} from '@mui/material'
-import {
-  ChangeEvent,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-  useTransition,
-} from 'react'
+import { Alert, CircularProgress, Pagination, SelectChangeEvent } from '@mui/material'
+import { ChangeEvent, useCallback, useEffect, useMemo, useState, useTransition } from 'react'
 
 type Props = {
   discoveries: PaginatedDiscoveries
@@ -49,20 +37,14 @@ export default function Discoveries(props: Props) {
         setDisplayPage(value)
       }
     },
-    [apiPage, displayPage]
+    [apiPage, displayPage],
   )
 
-  const onViewModeChange = useCallback(
-    () => setMode(mode === 'grid' ? 'list' : 'grid'),
-    [mode]
-  )
+  const onViewModeChange = useCallback(() => setMode(mode === 'grid' ? 'list' : 'grid'), [mode])
 
   const displayedDiscoveries = useMemo(() => {
     const isFirstPageInApiPage = displayPage % 2 !== 0
-    return (discoveries?.results || []).slice(
-      isFirstPageInApiPage ? 0 : 10,
-      isFirstPageInApiPage ? 10 : 20
-    )
+    return (discoveries?.results || []).slice(isFirstPageInApiPage ? 0 : 10, isFirstPageInApiPage ? 10 : 20)
   }, [discoveries, displayPage])
 
   const [isPending, startTransition] = useTransition()
@@ -82,8 +64,7 @@ export default function Discoveries(props: Props) {
     )
   }
 
-  if (!discoveries.results.length)
-    return <Alert severity="info">Aucun film</Alert>
+  if (!discoveries.results.length) return <Alert severity="info">Aucun film</Alert>
 
   return (
     <div className="flex flex-col justify-between gap-5">

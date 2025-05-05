@@ -6,8 +6,7 @@ import { useState, useEffect } from 'react'
 
 export default function ThemeMode() {
   const [isDarkTheme, setIsDarkTheme] = useState(
-    typeof window !== 'undefined' &&
-      window.localStorage.getItem('theme') === 'dark'
+    typeof window !== 'undefined' && window.localStorage.getItem('theme') === 'dark',
   )
 
   useEffect(() => {
@@ -30,15 +29,9 @@ export default function ThemeMode() {
       className="m-2 mr-2 flex gap-2 self-center rounded-full border bg-slate-300 p-1"
       onClick={() => setIsDarkTheme(!isDarkTheme)}
     >
-      <LightMode
-        className="m-1 self-center rounded-full bg-amber-300 p-1 dark:bg-transparent "
-        fontSize="large"
-      />
+      <LightMode className="m-1 self-center rounded-full bg-amber-300 p-1 dark:bg-transparent " fontSize="large" />
       <Divider orientation="vertical" flexItem />
-      <DarkMode
-        className="m-1 self-center rounded-full p-1 dark:bg-amber-300 "
-        fontSize="large"
-      />
+      <DarkMode className="m-1 self-center rounded-full p-1 dark:bg-amber-300 " fontSize="large" />
     </button>
   )
 }

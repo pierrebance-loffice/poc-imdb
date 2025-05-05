@@ -1,7 +1,6 @@
 import { Person, PersonMovie } from '@app/lib/service/models/person'
 
-export const mockImage = (type: string, id: string, size: string) =>
-  `http://localhost:3000/${type}/${id}/${size}`
+export const mockImage = (type: string, id: string, size: string) => `http://localhost:3000/${type}/${id}/${size}`
 
 export const mockImages = (type: string, id: string) => {
   return {
@@ -10,9 +9,7 @@ export const mockImages = (type: string, id: string) => {
   }
 }
 
-export const mockPersonMovie = (
-  overrides?: Partial<PersonMovie>
-): PersonMovie => {
+export const mockPersonMovie = (overrides?: Partial<PersonMovie>): PersonMovie => {
   return {
     id: 123,
     title: 'Super movie',

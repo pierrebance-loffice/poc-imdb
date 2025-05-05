@@ -27,7 +27,7 @@ describe('MovieModal component', () => {
     render(
       <div>
         <MovieModal movie={mockMovie()}></MovieModal>
-      </div>
+      </div>,
     )
     expect(screen.getByText('Super movie (2025)')).toBeInTheDocument()
   })
@@ -36,7 +36,7 @@ describe('MovieModal component', () => {
     render(
       <div>
         <MovieModal movie={mockMovie()} person={mockPerson()}></MovieModal>
-      </div>
+      </div>,
     )
     expect(screen.getByText('Smeagol: Gollum')).toBeInTheDocument()
   })
@@ -53,7 +53,7 @@ describe('MovieModal component', () => {
             job: 'Director',
           })}
         ></MovieModal>
-      </div>
+      </div>,
     )
     expect(screen.getByText('Mr Director: Director')).toBeInTheDocument()
   })
@@ -62,7 +62,7 @@ describe('MovieModal component', () => {
     render(
       <div>
         <MovieModal movie={mockMovie()}></MovieModal>
-      </div>
+      </div>,
     )
     expect(screen.getByTestId('btn-close-movie-modal')).toBeInTheDocument()
   })
@@ -71,20 +71,18 @@ describe('MovieModal component', () => {
     render(
       <div>
         <MovieModal movie={mockMovie()}></MovieModal>
-      </div>
+      </div>,
     )
     await userEvent.click(screen.getByTestId('btn-close-movie-modal'))
     expect(screen.queryByText('Super movie (2025)')).not.toBeInTheDocument()
-    expect(
-      screen.queryByTestId('btn-close-movie-modal')
-    ).not.toBeInTheDocument()
+    expect(screen.queryByTestId('btn-close-movie-modal')).not.toBeInTheDocument()
   })
 
   it('navigate back', async () => {
     render(
       <div>
         <MovieModal movie={mockMovie()}></MovieModal>
-      </div>
+      </div>,
     )
     await userEvent.click(screen.getByTestId('btn-close-movie-modal'))
     expect(mockRouter.back).toHaveBeenCalledWith()
@@ -94,7 +92,7 @@ describe('MovieModal component', () => {
     render(
       <div>
         <MovieModal movie={mockMovie()}></MovieModal>
-      </div>
+      </div>,
     )
     expect(screen.getByText('Consulter la page du film')).toBeInTheDocument()
   })

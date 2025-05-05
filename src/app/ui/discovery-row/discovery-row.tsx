@@ -17,11 +17,7 @@ export default function DiscoveryRow({ discovery }: { discovery: Discovery }) {
         <div className="flex grow flex-col justify-end gap-2 p-2 pl-0">
           <span className="grow text-xl">{title}</span>
           <div className="flex">
-            {!!genres.length ? (
-              <DiscoveryGenres genres={genres} classNames="grow" />
-            ) : (
-              <p className="grow"></p>
-            )}
+            {!!genres.length ? <DiscoveryGenres genres={genres} classNames="grow" /> : <p className="grow"></p>}
             <div className="flex items-center gap-2">
               <MovieVotes movie={discovery} size="small" />
             </div>

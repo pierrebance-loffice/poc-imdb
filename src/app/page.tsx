@@ -15,12 +15,7 @@ export default async function Home() {
   const discoveries = await discoverMovies(1, 'popularity.desc')
   return (
     <BaseLayout enableButton={false}>
-      <Discoveries
-        apiPage={1}
-        displayPage={1}
-        sorting="popularity.desc"
-        discoveries={discoveries}
-      />
+      <Discoveries apiPage={1} displayPage={1} sorting="popularity.desc" discoveries={discoveries} />
     </BaseLayout>
   )
 }

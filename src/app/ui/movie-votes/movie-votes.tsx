@@ -2,10 +2,7 @@ import { Discovery } from '@app/lib/service/models/discovery'
 import { Movie } from '@app/lib/service/models/movie'
 import { Rating } from '@mui/material'
 
-export default function MovieVotes(props: {
-  movie: Discovery | Movie
-  size: 'small' | 'medium' | 'large'
-}) {
+export default function MovieVotes(props: { movie: Discovery | Movie; size: 'small' | 'medium' | 'large' }) {
   const {
     movie: { voteCount, voteAverage },
     size,

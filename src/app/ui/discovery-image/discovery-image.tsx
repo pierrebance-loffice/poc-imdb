@@ -14,17 +14,10 @@ export default function DiscoveryImage({
   return (
     <>
       {!!discovery?.posterPath?.small && (
-        <CardMedia
-          title={discovery.title}
-          image={discovery.posterPath.small}
-          sx={{ height, width }}
-        />
+        <CardMedia title={discovery.title} image={discovery.posterPath.small} sx={{ height, width }} />
       )}
       {!discovery?.posterPath?.small && (
-        <div
-          className="flex justify-center bg-slate-50 dark:bg-gray-600"
-          style={{ height, width }}
-        >
+        <div className="flex justify-center bg-slate-50 dark:bg-gray-600" style={{ height, width }}>
           <ImageNotSupported className="self-center text-6xl dark:text-gray-200" />
         </div>
       )}

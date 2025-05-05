@@ -2,11 +2,7 @@
 
 import { Modal, Skeleton } from '@mui/material'
 
-export default function ModalSkeleton({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function ModalSkeleton({ children }: { children: React.ReactNode }) {
   return (
     <Modal open>
       <>

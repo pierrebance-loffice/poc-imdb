@@ -1,10 +1,4 @@
-export default function Genre({
-  name,
-  className,
-}: {
-  name: string
-  className: string
-}) {
+export default function Genre({ name, className }: { name: string; className: string }) {
   return (
     <div
       key={`genre-${name.toLowerCase()}`}

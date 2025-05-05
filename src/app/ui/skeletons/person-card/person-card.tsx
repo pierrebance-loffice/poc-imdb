@@ -8,12 +8,7 @@ export default function PersonCardSkeleton() {
       </div>
       <div className="flex flex-col gap-2">
         <Skeleton variant="rounded" height={30} width={400} />
-        <Skeleton
-          variant="rectangular"
-          className="w-full"
-          height={200}
-          width={400}
-        />
+        <Skeleton variant="rectangular" className="w-full" height={200} width={400} />
       </div>
     </div>
   )
